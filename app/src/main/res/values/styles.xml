@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Основная тема приложения -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Цвета текста -->
+        <item name="android:textColorPrimary">#FFFFFF</item> <!-- Белый для основного текста -->
+        <item name="android:textColorSecondary">#B0BEC5</item> <!-- Светло-серый для второстепенного текста -->
+        <item name="android:textColorTertiary">#FFEB3B</item> <!-- Желтый для дополнительного текста -->
+    </style>
+
+</resources>
