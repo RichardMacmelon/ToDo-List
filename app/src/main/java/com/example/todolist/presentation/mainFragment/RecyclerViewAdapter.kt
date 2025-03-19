@@ -1,4 +1,4 @@
-package com.example.todolist.presentation
+package com.example.todolist.presentation.mainFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewViewHolder>() {
     private var data = emptyList<TaskDb>()
     fun setData(data: List<TaskDb>) {
         this.data = data
-        println(data)
         notifyDataSetChanged()
     }
 

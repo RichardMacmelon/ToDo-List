@@ -7,16 +7,26 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.todolist.presentation.MainFragment"
+        android:name="com.example.todolist.presentation.mainFragment.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
+        <argument
+            android:name="tabIndex"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_mainFragment_to_addNameFragment"
             app:destination="@id/addNameFragment" />
     </fragment>
-    <fragment
+
+    <dialog
         android:id="@+id/addNameFragment"
-        android:name="com.example.todolist.presentation.AddNameFragment"
+        android:name="com.example.todolist.presentation.addNameFragment.AddNameFragment"
         android:label="fragment_add_name"
-        tools:layout="@layout/fragment_add_name" />
+        tools:layout="@layout/fragment_add_name">
+        <argument
+            android:name="tabIndex"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </dialog>
 </navigation>

@@ -5,11 +5,10 @@ import com.example.todolist.data.TaskDb
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetAllInfoFromDbUseCase @Inject constructor(
+class GetTasksByDoneStatusUseCase @Inject constructor(
     private val mainRepository: MainRepository
 ) {
-
-    fun getAllInfo() : Flow<List<TaskDb>> {
-        return mainRepository.getDBInfo().getAll()
+    fun getNeedTasks(isDone: Boolean) : Flow<List<TaskDb>> {
+        return mainRepository.getDBInfo().getTasksByDoneStatus(isDone)
     }
 }

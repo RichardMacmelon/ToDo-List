@@ -3,8 +3,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id ("kotlin-kapt")
-    id ("org.jetbrains.kotlin.kapt")
+    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
 }
 
@@ -46,20 +46,23 @@ android {
 
 dependencies {
 
+    //Lottie
+    implementation(libs.lottie)
+
     //Room
-    implementation (libs.androidx.room.runtime)
-    implementation (libs.androidx.room.ktx)
-    kapt (libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
     //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation (libs.androidx.lifecycle.livedata.ktx)
-    implementation (libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // Navigation Component
-    implementation (libs.androidx.fragment.ktx.v162)
-    implementation (libs.androidx.navigation.fragment.ktx.v288)
-    implementation (libs.androidx.navigation.ui.ktx.v288)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //RecyclerView
     implementation(libs.androidx.recyclerview)
