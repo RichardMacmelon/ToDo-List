@@ -1,12 +1,14 @@
 package com.example.todolist.presentation.mainFragment
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.TaskDb
 import com.example.todolist.databinding.TaskCardBinding
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewViewHolder>() {
+class RecyclerViewAdapter(private val onClick: (TaskDb) -> Unit) :
+    RecyclerView.Adapter<RecyclerViewViewHolder>() {
 
     private var data = emptyList<TaskDb>()
     fun setData(data: List<TaskDb>) {
@@ -31,6 +33,20 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewViewHolder>() {
         with(holder.binding) {
             textViewTaskName.text = item?.taskName
             textViewTime.text = item?.taskDate
+
+            if(item?.done == true) {
+                textViewTaskName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                textViewTime.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            }
+
+            checkBox.setOnCheckedChangeListener(null)
+            checkBox.isChecked = item?.done == true
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                item?.let {
+                    val updatedItem = item.copy(done = isChecked)
+                    onClick(updatedItem)
+                }
+            }
         }
     }
 }

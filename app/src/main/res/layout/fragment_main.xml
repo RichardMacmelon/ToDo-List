@@ -66,6 +66,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageButton
+        android:id="@+id/button_delete"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/ripple_effect_for_button"
+        android:elevation="20dp"
+        android:src="@drawable/ic_button_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ic_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/button_delete"
+        app:layout_constraintEnd_toEndOf="@+id/button_delete"
+        app:layout_constraintStart_toStartOf="@+id/button_delete"
+        app:layout_constraintTop_toTopOf="@+id/button_delete" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

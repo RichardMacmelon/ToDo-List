@@ -3,7 +3,6 @@ package com.example.todolist.presentation.addNameFragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.example.todolist.data.TaskDb
 import com.example.todolist.databinding.FragmentAddNameBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalTime
 
 @AndroidEntryPoint
 class AddNameFragment : BottomSheetDialogFragment() {
@@ -44,7 +44,11 @@ class AddNameFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupUI() {
-        binding.timePicker.setIs24HourView(true)
+        with(binding.timePicker) {
+            setIs24HourView(true)
+            hour = LocalTime.now().hour + 1
+            minute = 0
+        }
 
         binding.buttonCancel.setOnClickListener {
             dismiss()
@@ -67,7 +71,7 @@ class AddNameFragment : BottomSheetDialogFragment() {
         binding.buttonSave.setOnClickListener {
             val task = TaskDb(
                 taskName = binding.editText.text.toString(),
-                taskDate = binding.timePicker.hour.toString() + ":" + binding.timePicker.minute.toString(),
+                taskDate = binding.timePicker.hour.toString() + ":" + binding.timePicker.minute.toString() + 0,
                 done = tabIndex == 1
             )
             viewModel.addToCollection(task)

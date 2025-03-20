@@ -13,4 +13,13 @@ interface TaskDao {
 
     @Insert
     suspend fun insertTask(film: TaskDb)
+
+    @Query("DELETE FROM taskDb WHERE done = :done")
+    suspend fun deleteAllTaskByDone(done: Boolean)
+
+    @Query("UPDATE taskDb SET done = 1 WHERE task_id = :taskId")
+    suspend fun markTaskAsDone(taskId: Int)
+
+    @Query("UPDATE taskDb SET done = 0  WHERE task_id = :taskId")
+    suspend fun markTaskAsNotDone(taskId: Int)
 }

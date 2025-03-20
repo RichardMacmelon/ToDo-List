@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
+import com.example.todolist.data.TaskDb
 import com.example.todolist.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -21,7 +23,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by viewModels()
-    private val recyclerViewAdapter = RecyclerViewAdapter()
+    private val recyclerViewAdapter = RecyclerViewAdapter { taskId -> onCheckBoxClick(taskId) }
 
     private val tabIndex: Int by lazy {
         arguments?.getInt("tabIndex") ?: 0
@@ -58,6 +60,13 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_addNameFragment, bundle)
         }
 
+        binding.buttonDelete.setOnClickListener {
+            viewModel.deleteAllTaskByDone(tabIndex != 0)
+            Toast.makeText(
+                requireContext(), getString(R.string.delete_toast), Toast.LENGTH_SHORT
+            ).show()
+        }
+
         binding.lottieAnimationView.setAnimation(
             if (tabIndex == 0) R.raw.animation_to_first_tab else R.raw.animation_to_second_tab
         )
@@ -77,12 +86,30 @@ class MainFragment : Fragment() {
                 binding.recyclerView.visibility = View.INVISIBLE
                 binding.lottieAnimationView.visibility = View.VISIBLE
                 binding.title.visibility = View.VISIBLE
+                binding.buttonDelete.isEnabled = false
+                binding.icDelete.alpha = 0.5f
             } else {
                 binding.recyclerView.visibility = View.VISIBLE
                 binding.lottieAnimationView.visibility = View.INVISIBLE
                 binding.title.visibility = View.INVISIBLE
+                binding.buttonDelete.isEnabled = true
+                binding.icDelete.alpha = 1.0f
             }
 
+        }
+    }
+
+    private fun onCheckBoxClick(item: TaskDb) {
+        if (tabIndex == 0) {
+            viewModel.markTaskAsDone(item.taskId)
+            Toast.makeText(
+                requireContext(), getString(R.string.done_toast), Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            viewModel.markTaskAsNotDone(item.taskId)
+            Toast.makeText(
+                requireContext(), getString(R.string.not_done_toast), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

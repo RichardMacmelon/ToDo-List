@@ -13,4 +13,7 @@
     <string name="planned">Запланировано</string>
     <string name="completed">Завершено</string>
     <string name="text_in_custom_view">В этой категории нет задач.\nЩелкните +, чтобы создать задачу.</string>
+    <string name="done_toast">Напоминание завершено</string>
+    <string name="not_done_toast">Напоминание восстановлено</string>
+    <string name="delete_toast">Категория очищена</string>
 </resources>
